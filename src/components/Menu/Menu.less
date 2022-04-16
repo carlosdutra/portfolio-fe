@@ -1,0 +1,25 @@
+.menu {
+	padding: 16px 0;
+
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+
+	// transform: translateY(-100%);
+	// transition: transform 0.5s ease-in-out;
+
+	&.active {
+		opacity: 1;
+
+		// transform: translateY(0%);
+	}
+
+	nav {
+		display: flex;
+		gap: 16px;
+
+		a {
+			margin-bottom: 0;
+			letter-spacing: 3px;
+		}
+	}
+}

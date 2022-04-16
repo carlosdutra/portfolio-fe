@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import Anchor from "widgets/Anchor";
+
+import "./Menu.less";
 
 import { useQuery } from "@apollo/client";
-import { LOAD_MENU } from "./queries";
+import { LOAD_MENU } from "queries";
 
 const Menu = () => {
 	const { loading, error, data } = useQuery(LOAD_MENU);
@@ -10,14 +14,23 @@ const Menu = () => {
 
 	useEffect(() => {
 		if (error) console.log(error);
-		setApiData(data?.menuBar.data);
+		setApiData(data?.menuBar.data.attributes.Items);
 	}, [data]);
 
 	return (
-		<div>
-			{apiData.map((item) => {
-				return item;
-			})}
+		<div className={`menu${!loading ? " active" : ""}`}>
+			<nav>
+				{apiData?.map((a, index) => (
+					<Anchor
+						router={a.Router}
+						blank={a.OpenInNewTab}
+						to={a.ItemURL}
+						key={index}
+					>
+						{a.ItemLabel}
+					</Anchor>
+				))}
+			</nav>
 		</div>
 	);
 };

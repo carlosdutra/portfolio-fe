@@ -10,9 +10,46 @@ export const LOAD_PROJECTS = gql`
 					ProjectSlug
 					ProjectURL
 					ProjectDescription
+					ProjectFullCapture {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
 					ProjectImages {
 						data {
-							id
+							attributes {
+								url
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const LOAD_PROJECT = gql`
+	query Projects($slug: String!) {
+		projects(filters: { ProjectSlug: { eq: $slug } }) {
+			data {
+				attributes {
+					ProjectName
+					ProjectURL
+					ProjectDescription
+					ProjectFullCapture {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
+					ProjectImages {
+						data {
+							attributes {
+								url
+							}
 						}
 					}
 				}
@@ -30,6 +67,8 @@ export const LOAD_MENU = gql`
 						... on ComponentMenuItem {
 							ItemLabel
 							ItemURL
+							Router
+							OpenInNewTab
 						}
 					}
 				}

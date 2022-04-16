@@ -1,0 +1,30 @@
+@import "../../less/variables.less";
+
+.showcase--item {
+	display: flex;
+	gap: 20px;
+
+	@media @tablet {
+		display: block;
+	}
+
+	&-content {
+		width: 50%;
+
+		@media @tablet {
+			width: 100%;
+		}
+	}
+
+	&-image {
+		width: 50%;
+
+		@media @tablet {
+			width: 100%;
+		}
+
+		img {
+			max-width: 100%;
+		}
+	}
+}

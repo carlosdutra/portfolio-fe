@@ -1,23 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 
-// import { useQuery } from "@apollo/client";
-// import { LOAD_PROJECTS } from "./queries";
+// Components
+import Menu from "components/Menu";
+import Showcase from "components/Showcase";
+import ShowCaseItem from "components/ShowCaseItem";
+import Footer from "components/Footer";
+
+// Pages
+import Home from "pages/Home";
 
 function App() {
-	// const { loading, error, data } = useQuery(LOAD_PROJECTS);
-
-	// const [apiData, setApiData] = useState(null);
-
-	// useEffect(() => {
-	// 	if (error) console.log(error);
-	// 	setApiData(data?.projects.data);
-	// }, [data]);
-
 	return (
 		<div className="App">
-			{/* {loading && "Loading..."} */}
-			{/* {apiData && apiData.projects} */}
+			<div className="container">
+				<Menu />
+				<div className="content">
+					<Routes>
+						<Route index element={<Showcase />} />
+						<Route path="work" element={<Showcase />} />
+						<Route path={`work/:slug`} element={<ShowCaseItem />} />
+						<Route path="about" element={<Home />} />
+						<Route path="*" element={<Navigate to="work" />} />
+					</Routes>
+					<Footer />
+				</div>
+			</div>
 		</div>
 	);
 }
