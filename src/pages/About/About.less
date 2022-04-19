@@ -1,0 +1,15 @@
+@import "../../less/variables.less";
+
+.showcases-technologies {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 100px;
+
+	@media @tablet-large {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	@media @phone {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

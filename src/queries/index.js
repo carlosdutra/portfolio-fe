@@ -2,22 +2,12 @@ import { gql } from "@apollo/client";
 
 export const LOAD_PROJECTS = gql`
 	query {
-		projects {
+		projects(sort: "ProjectListOrder", pagination: { start: 0, limit: 100 }) {
 			data {
-				id
 				attributes {
 					ProjectName
 					ProjectSlug
-					ProjectURL
-					ProjectDescription
 					ProjectFullCapture {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					ProjectImages {
 						data {
 							attributes {
 								url
@@ -38,7 +28,16 @@ export const LOAD_PROJECT = gql`
 					ProjectName
 					ProjectURL
 					ProjectDescription
+					ProjectBrief
 					ProjectFullCapture {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
+					ProjectPartnerUrl
+					ProjectPartnerLogo {
 						data {
 							attributes {
 								url
@@ -70,6 +69,20 @@ export const LOAD_MENU = gql`
 							Router
 							OpenInNewTab
 						}
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const LOAD_TECHNOLOGIES = gql`
+	query {
+		about {
+			data {
+				attributes {
+					Techonologies(pagination: { start: 0, limit: 100 }) {
+						Name
 					}
 				}
 			}

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import Anchor from "widgets/Anchor";
+import Switcher from "widgets/Switcher";
 
 import "./Menu.less";
 
-import { useQuery } from "@apollo/client";
 import { LOAD_MENU } from "queries";
+import { useQuery } from "@apollo/client";
 
 const Menu = () => {
 	const { loading, error, data } = useQuery(LOAD_MENU);
@@ -20,16 +21,19 @@ const Menu = () => {
 	return (
 		<div className={`menu${!loading ? " active" : ""}`}>
 			<nav>
-				{apiData?.map((a, index) => (
-					<Anchor
-						router={a.Router}
-						blank={a.OpenInNewTab}
-						to={a.ItemURL}
-						key={index}
-					>
-						{a.ItemLabel}
-					</Anchor>
-				))}
+				<div className="menu-links">
+					{apiData?.map((a, index) => (
+						<Anchor
+							router={a.Router}
+							blank={a.OpenInNewTab}
+							to={a.ItemURL}
+							key={index}
+						>
+							{a.ItemLabel}
+						</Anchor>
+					))}
+				</div>
+				<Switcher />
 			</nav>
 		</div>
 	);
