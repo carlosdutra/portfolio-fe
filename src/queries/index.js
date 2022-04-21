@@ -76,11 +76,15 @@ export const LOAD_MENU = gql`
 	}
 `;
 
-export const LOAD_TECHNOLOGIES = gql`
+export const LOAD_ABOUT = gql`
 	query {
 		about {
 			data {
 				attributes {
+					Hero {
+						Heading
+						SubHeading
+					}
 					Techonologies(pagination: { start: 0, limit: 100 }) {
 						Name
 					}

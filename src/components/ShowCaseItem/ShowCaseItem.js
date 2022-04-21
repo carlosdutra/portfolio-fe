@@ -11,8 +11,6 @@ import { motion } from "framer-motion";
 import { AnimationProps } from "animation";
 
 const ShowCaseItem = () => {
-	// const [isImgCollapsed, setIsImgCollapsed] = useState(true);
-
 	const { slug } = useParams();
 	const navigate = useNavigate();
 
@@ -24,9 +22,10 @@ const ShowCaseItem = () => {
 	useEffect(() => {
 		if (error) console.log(error);
 		setApiData(data?.projects?.data[0].attributes);
-
 		window.scrollTo(0, 0);
 	}, [data]);
+
+	if (loading) return false;
 
 	return (
 		<motion.div {...AnimationProps} key="showcaseitem">
@@ -38,40 +37,43 @@ const ShowCaseItem = () => {
 					>
 						<span className="material-icons">&#xe5c4;</span> Go back
 					</button>
-					<div className="mt-l">
-						<h2>IN PARTNERSHIP WITH</h2>
-						<a href={apiData?.ProjectPartnerUrl} target="_blank">
-							<img
-								className="mt-s showcase--item-content-partnership"
-								src="https://weareloop.com/wp-content/uploads/2021/04/logo-yellow-circle-n.png.webp"
-							/>
-						</a>
-					</div>
+					{apiData?.ProjectPartnerUrl && (
+						<div className="mt-l">
+							<h2>IN PARTNERSHIP WITH</h2>
+							<a href={apiData?.ProjectPartnerUrl} target="_blank">
+								<img
+									className="mt-s showcase--item-content-partnership"
+									src={
+										apiData?.ProjectPartnerLogo?.data?.attributes?.url
+									}
+								/>
+							</a>
+						</div>
+					)}
 					<div className="mt-l">
 						<h2>THE CLIENT</h2>
-						<h3>{apiData?.ProjectName}</h3>
-						<p>{apiData?.ProjectDescription}</p>
+						<h3 className="mt-m">{apiData?.ProjectName}</h3>
+						<p className="mt-m mb-m">{apiData?.ProjectDescription}</p>
 						<Anchor to={apiData?.ProjectURL} blank={true} btn={true}>
 							Visit website
 						</Anchor>
 					</div>
-					<div className="mt-l">
-						<h2>THE BRIEF</h2>
-						<p>{apiData?.ProjectBrief}</p>
-					</div>
+					{apiData?.ProjectBrief && (
+						<div className="mt-l">
+							<h2>THE BRIEF</h2>
+							<p>{apiData?.ProjectBrief}</p>
+						</div>
+					)}
 				</div>
 				<div className="showcase--item-image">
-					<img
-						src={
-							process.env.REACT_APP_URL +
-							apiData?.ProjectFullCapture?.data?.attributes?.url
-						}
-					/>
+					<img src={apiData?.ProjectFullCapture?.data?.attributes?.url} />
 				</div>
 			</div>
-			<div className="showcase--media mt-l">
-				<h1 className="h1">TAKE A BETTER LOOK</h1>
-			</div>
+			{apiData?.ProjectImages?.data.length > 0 && (
+				<div className="showcase--media mt-l">
+					<h1 className="h1">TAKE A BETTER LOOK</h1>
+				</div>
+			)}
 		</motion.div>
 	);
 };

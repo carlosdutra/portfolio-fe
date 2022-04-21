@@ -27,6 +27,8 @@ const Showcase = () => {
 		hidden: { opacity: 0, x: -100 },
 	};
 
+	if (loading) return false;
+
 	return (
 		<motion.section
 			className="showcases-list"
@@ -43,7 +45,6 @@ const Showcase = () => {
 							style={{
 								backgroundImage:
 									"url(" +
-									process.env.REACT_APP_URL +
 									s.attributes.ProjectFullCapture?.data?.attributes
 										?.url +
 									")",

@@ -29,7 +29,11 @@ const Anchor = ({
 			);
 		}
 	} else {
-		return <Link to={to}>{children}</Link>;
+		return (
+			<Link className={btn ? "btn" : ""} to={to}>
+				{children}
+			</Link>
+		);
 	}
 };
 

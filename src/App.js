@@ -9,7 +9,7 @@ import ShowCaseItem from "components/ShowCaseItem";
 import Footer from "components/Footer";
 
 // Pages
-import Home from "pages/Home";
+// import Home from "pages/Home";
 import About from "pages/About";
 
 // Context
@@ -32,7 +32,7 @@ function App() {
 					<div className="content mt-l">
 						<AnimatePresence>
 							<Routes key={location.pathname}>
-								<Route index element={<Home />} />
+								<Route index element={<Showcase />} />
 								<Route path="work" element={<Showcase />} />
 								<Route path={`work/:slug`} element={<ShowCaseItem />} />
 								<Route path="about" element={<About />} />
